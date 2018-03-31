@@ -71,7 +71,27 @@ classifier.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metric
 
 
 # Training the model on the preprocessed data
-classifier.fit(X_train, y_train, validation_data=(X_test, y_test), epochs = 5, batch_size = 200)
+history = classifier.fit(X_train, y_train, validation_data=(X_test, y_test), epochs = 5, batch_size = 200)
+
+import matplotlib.pyplot as plt
+
+# summarize history for accuracy
+plt.plot(history.history['acc'])
+plt.plot(history.history['val_acc'])
+plt.title('model accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+plt.show()
+
+# summarize history for loss
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+plt.show()
 
 # Evaluating the trained model
 classifier.evaluate(X_test, y_test)
